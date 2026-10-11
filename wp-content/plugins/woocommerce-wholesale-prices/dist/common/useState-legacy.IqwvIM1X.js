@@ -1,0 +1,1 @@
+System.register(["./preload-helper-legacy.c2-BBzUQ.js"],function(e,t){"use strict";var n;return{setters:[e=>{n=e.A}],execute:function(){e("u",function(e){const t="function"==typeof e?e():e,r=n(t);return[r,function(e){r.value=e}]})}}});

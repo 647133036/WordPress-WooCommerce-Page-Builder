@@ -1,0 +1,60 @@
+== Changelog ==
+= 3.3.2 =
+*  Added: New Onboarding flow
+= 3.3.1 =
+* Security: Authenticate the payment callback against the order key; it previously accepted any order ID from an unauthenticated request.
+* Security: Confirm cancellations with Flutterwave before changing an order status.
+* Security: Reject transaction references and webhooks replayed against an order.
+* Security: Use a timing-safe comparison for the webhook signature.
+* Security: Encrypt the stored card token at rest and keep customer PII out of the logs.
+* Security: Orders with no recorded transaction reference only accept a reference issued in that order's name.
+* Fixed: Callback parameters are no longer dropped on stores using plain permalinks.
+* Fixed: Order metadata is written through the CRUD API so it works under HPOS.
+* Fixed: A successful charge that completes after its order was cancelled now reopens the order instead of being rejected, so customers are not left charged with nothing fulfilled.
+= 3.1.0 =
+* Added: Set Minimum Support to WooCommerce 6.9 or greater.
+* Added: Flutterwave Logger instance using wc_logger.
+= 2.3.6 =
+* Fixed: Dynamic Adjustment to Custom Permalink Set by Merchant.
+* Fixed: Redirect Payment option return a Payment Mismatch Error.
+= 2.3.5 =
+* Added: Support for WooCommerce HPOS.
+* Fixed: WooCommerce Blocks Compatibility Issues with WooCommerce 7.0 to 6.9.1.
+* Fixed: Payment Option alignment on WooCommerce Checkout Block.
+= 2.3.4 = 
+* Fix: Webhook Handler Acknowledgement.
+= 2.3.2 =
+* Added: Support for WooCommerce Blocks.
+* Updated: WooCommerce Checkout Process.
+= 2.3.0 =
+* Fix: Handled MobileMoney Payment Handler Error.
+= 2.2.9 =
+*  Fixed: PHP 8 support for v3 Webhook Handler.
+= 2.2.8 =
+*  Fixed: Woocommerce Subscription processing function error.
+*  New Feat: Switched to WC-Logger class for logging.
+= 2.2.7 =
+* fix: on payment completion redirect to order reciept page (redirect Method)
+* fix: PHP 8.0 compatibility ( optional method parameter )
+= 2.2.0 =
+* Use one base URL for live and test mode.
+
+* Merchants can get their [test and live](https://developer.flutterwave.com/docs/api-keys) keys [here](https://rave.flutterwave.com/dashboard/settings/apis)
+
+* Using test keys keeps you in test mode, to move to live mode add live keys.
+
+* Support for Woocommerce recurring, this allows merchants to collect recurring payments in woocommerce.
+
+= 2.1.0 =
+* Support for Woocommerce recurring, this allows merchants to collect recurring payments in woocommerce.
+
+= 2.0.0 =
+* Support for new currencies (ZMW, UGX, RWF, TZS, SLL).
+
+= 1.0.1 =
+*   Add redirect style with admin toogle for redirect or popup payment style 
+*   Custom gateway name 
+*   Bug fixes for country 
+
+= 1.0.0 =
+*   First release

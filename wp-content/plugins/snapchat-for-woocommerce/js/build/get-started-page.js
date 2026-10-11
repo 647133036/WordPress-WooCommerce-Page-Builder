@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunksnapchat_for_woocommerce||=[]).push([[207],{9484(e,t,r){r.r(t);var o=r(6476),s=r(3905),a=r(3666);r.d(t,["default",0,()=>{const e=(0,a.xP)(),t=(0,a.FN)(),r=s.nP.setupComplete?t:e;return(0,o.getHistory)().replace(r),null}])}}]);

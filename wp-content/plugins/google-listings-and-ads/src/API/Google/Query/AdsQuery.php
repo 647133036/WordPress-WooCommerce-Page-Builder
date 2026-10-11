@@ -1,0 +1,124 @@
+<?php
+// phpcs:disable WordPress.Security.EscapeOutput.ExceptionNotEscaped -- Exception messages are context-neutral data; escape only at the eventual output boundary.
+declare( strict_types=1 );
+
+namespace Automattic\WooCommerce\GoogleListingsAndAds\API\Google\Query;
+
+use Automattic\WooCommerce\GoogleListingsAndAds\Exception\InvalidProperty;
+use Automattic\WooCommerce\GoogleListingsAndAds\Google\Ads\GoogleAdsClient;
+use Google\Ads\GoogleAds\V23\Services\GoogleAdsRow;
+use Google\Ads\GoogleAds\V23\Services\SearchGoogleAdsRequest;
+use Google\Ads\GoogleAds\V23\Services\SearchSettings;
+use Google\ApiCore\ApiException;
+
+defined( 'ABSPATH' ) || exit;
+
+/**
+ * Class AdsQuery
+ *
+ * @package Automattic\WooCommerce\GoogleListingsAndAds\API\Google\Query
+ */
+abstract class AdsQuery extends Query {
+
+	/**
+	 * Client which handles the query.
+	 *
+	 * @var GoogleAdsClient
+	 */
+	protected $client = null;
+
+	/**
+	 * Ads Account ID.
+	 *
+	 * @var int
+	 */
+	protected $id = null;
+
+	/**
+	 * Arguments to add to the search query.
+	 *
+	 * Note: While we allow pageSize to be set, we do not pass it to the API.
+	 * pageSize has been deprecated in the API since V17 and is fixed to 10000 rows.
+	 *
+	 * @var array
+	 */
+	protected $search_args = [];
+
+	/**
+	 * Set the client which will handle the query.
+	 *
+	 * @param GoogleAdsClient $client Client instance.
+	 * @param int             $id     Account ID.
+	 *
+	 * @return QueryInterface
+	 * @throws InvalidProperty If the ID is empty.
+	 */
+	public function set_client( GoogleAdsClient $client, int $id ): QueryInterface {
+		if ( empty( $id ) ) {
+			throw InvalidProperty::not_null( get_class( $this ), 'id' );
+		}
+
+		$this->client = $client;
+		$this->id     = $id;
+
+		return $this;
+	}
+
+	/**
+	 * Get the first row from the results.
+	 *
+	 * @return GoogleAdsRow
+	 * @throws ApiException When no results returned or an error occurs.
+	 */
+	public function get_result(): GoogleAdsRow {
+		$results = $this->get_results();
+
+		if ( $results ) {
+			foreach ( $results->iterateAllElements() as $row ) {
+				return $row;
+			}
+		}
+
+		throw new ApiException( __( 'No result from query', 'google-listings-and-ads' ), 404, '' );
+	}
+
+	/**
+	 * Perform the query and save it to the results.
+	 *
+	 * @throws ApiException If the search call fails.
+	 * @throws InvalidProperty If the client is not set.
+	 */
+	protected function query_results() {
+		if ( ! $this->client || ! $this->id ) {
+			throw InvalidProperty::not_null( get_class( $this ), 'client' );
+		}
+
+		$request = new SearchGoogleAdsRequest();
+
+		if ( ! empty( $this->search_args['pageToken'] ) ) {
+			$request->setPageToken( $this->search_args['pageToken'] );
+		}
+
+		// Allow us to get the total number of results.
+		$request->setSearchSettings(
+			new SearchSettings(
+				[
+					'return_total_results_count' => true,
+				]
+			)
+		);
+
+		// pageSize is deprecated in the Ads API (see the $search_args docblock) and never
+		// bounds the response, so enforce the requested per_page as a GAQL LIMIT instead.
+		// Without it a large report deserialises a full fixed-size page — up to 10,000
+		// deeply-nested protobuf rows — and can exhaust PHP's memory.
+		if ( ! empty( $this->search_args['pageSize'] ) ) {
+			$this->set_limit( (int) $this->search_args['pageSize'] );
+		}
+
+		$request->setQuery( $this->build_query() );
+		$request->setCustomerId( $this->id );
+
+		$this->results = $this->client->getGoogleAdsServiceClient()->search( $request );
+	}
+}

@@ -1,0 +1,32 @@
+.app-input-control {
+	.components-flex-item {
+		inline-size: 100%;
+		margin-inline-end: 0;
+		max-inline-size: 100%;
+
+		// hack with !important to override the specificity in @wordpress/components.
+		label.components-input-control__label {
+			color: wpColors.$gray-700 !important;
+			white-space: normal !important;
+		}
+	}
+
+	&__character-count {
+		margin-block-start: calc(wpVariables.$grid-unit-05 / 2);
+		text-align: end;
+		line-height: variables.$rfw-line-height-smaller;
+		font-size: variables.$rfw-font-smaller;
+		color: wpColors.$gray-700;
+	}
+
+	&.has-error .components-input-control__backdrop,
+	&--error-character-count .components-input-control .components-input-control__container .components-input-control__backdrop {
+		border-color: wpColors.$alert-red;
+		box-shadow: none;
+	}
+
+	&.has-error .components-base-control__help,
+	&--error-character-count &__character-count {
+		color: wpColors.$alert-red;
+	}
+}

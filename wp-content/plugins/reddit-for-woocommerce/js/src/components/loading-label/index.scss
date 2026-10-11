@@ -1,0 +1,18 @@
+.rfw-loading-label {
+	display: inline-flex;
+	align-items: center;
+	gap: wpVariables.$grid-unit-10;
+	block-size: wpVariables.$button-size;
+	color: var(--wp-admin-theme-color);
+
+	.woocommerce-spinner {
+		block-size: wpVariables.$icon-size;
+		inline-size: wpVariables.$icon-size;
+		min-inline-size: wpVariables.$icon-size;
+
+		&__circle {
+			stroke: currentcolor;
+			stroke-width: wpVariables.$grid-unit;
+		}
+	}
+}

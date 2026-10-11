@@ -1,0 +1,39 @@
+.wwpp-recommendation-notice{
+    display: block;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+}
+
+.wwp-recommendation-main-warapper{
+    position: relative;
+    padding: 10px 35px 10px 25px;
+    background-color: #dce9de;
+    margin: 0px 20px 0px 20px;
+}
+
+.wwp-wpay-wc-settings-dismiss {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    color: #50575e;
+    padding: 2px 6px;
+}
+
+.wwp-wpay-wc-settings-dismiss:hover {
+    color: #000;
+}
+
+body.rtl .wwp-wpay-wc-settings-dismiss {
+    right: auto;
+    left: 5px;
+}
+
+body.rtl .wwp-recommendation-main-warapper {
+    padding: 10px 25px 10px 35px;
+}

@@ -1,0 +1,146 @@
+<?php
+/**
+ * Abstract base class for Conversion Event payloads.
+ *
+ * This abstract class provides default implementations for common Conversion Event
+ * fields defined in the {@see ConversionCommonPayloadInterface}. It ensures that
+ * all implementing event classes share a consistent baseline for critical metadata
+ * such as:
+ *
+ * - Partner identifier (`WOOCOMMERCE`)
+ * - Event timestamp (via {@see Helper::get_event_time()})
+ * - Action source (`WEBSITE`)
+ *
+ * Event-specific classes (e.g., PurchaseEvent, AddToCartEvent, ViewContentEvent)
+ * extend this base to inherit the defaults, while defining their own unique
+ * `tracking_type` identifiers.
+ *
+ * ---
+ * 🔗 Related Interfaces & Classes:
+ * - ConversionCommonPayloadInterface — defines shared required fields.
+ * - ConversionProductsPayloadInterface — adds product-level details.
+ * - ConversionFinalPayloadInterface — ensures payloads can be fully built.
+ * ---
+ *
+ * @package RedditForWooCommerce\Tracking\ConversionEvent
+ * @since 0.1.0
+ */
+
+namespace RedditForWooCommerce\Tracking\ConversionEvent;
+
+use RedditForWooCommerce\Tracking\ConversionEvent\Contract\ConversionCommonPayloadInterface;
+use RedditForWooCommerce\Utils\Helper;
+
+/**
+ * Abstract base class for Conversion Event payloads.
+ *
+ * Implements default logic for shared event fields, reducing duplication
+ * across concrete event classes. Subclasses are required to implement
+ * {@see AbstractEventPayloadBase::get_tracking_type()} to define their
+ * event type identifier.
+ *
+ * @since 0.1.0
+ */
+abstract class AbstractEventPayloadBase implements ConversionCommonPayloadInterface {
+	/**
+	 * Retrieves the identifier of the data source partner.
+	 *
+	 * For all WooCommerce integrations, this value is fixed as `WOOCOMMERCE`.
+	 * Ad Partners use this field to identify the system of origin for the event.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return string Partner identifier (`WOOCOMMERCE`).
+	 */
+	public static function get_partner(): string {
+		return 'WOOCOMMERCE';
+	}
+
+	/**
+	 * Retrieves the integration version associated with the payload.
+	 *
+	 * @since 1.0.4
+	 *
+	 * @return string Partner integration version.
+	 */
+	public static function get_partner_version(): string {
+		return REDDIT_FOR_WOOCOMMERCE_VERSION;
+	}
+
+	/**
+	 * Retrieves the Unix timestamp when the event occurred.
+	 *
+	 * Uses the {@see Helper::get_event_time()} utility method to return the
+	 * current event time in seconds. This ensures consistent and reliable
+	 * timestamp generation across all event payloads.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return int Unix timestamp (in seconds).
+	 */
+	public static function get_event_at(): int {
+		return Helper::get_event_time();
+	}
+
+	/**
+	 * Retrieves the source channel of the conversion event.
+	 *
+	 * Defaults to `WEBSITE`.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return string Action source identifier (`WEBSITE`).
+	 */
+	public static function get_action_source(): string {
+		return 'WEBSITE';
+	}
+
+	/**
+	 * Retrieves the unique tracking type identifier for the event.
+	 *
+	 * Subclasses must implement this method to define their event type constant
+	 * (e.g., `PURCHASE`, `ADD_TO_CART`, `VIEW_CONTENT`, `PAGE_VIEW`).
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return string Tracking type identifier.
+	 */
+	abstract public function get_tracking_type(): string;
+
+	/**
+	 * Appends optional event-level fields shared by every conversion event.
+	 *
+	 * Adds the following to the event array when the corresponding value is
+	 * available in `$args`:
+	 *
+	 * - `event_source_url` — URL of the page the event originated on. Reddit uses
+	 *   it on WEBSITE events for domain detection and as a fallback source for the
+	 *   click ID.
+	 * - `click_id` — Reddit click ID for the ad that drove the visit.
+	 * - `user`      — user match keys (IP address, user agent, pixel UUID, …).
+	 *
+	 * Centralizing this keeps the optional-field handling identical across all
+	 * event types, so a field can't be added to one event and forgotten in another.
+	 *
+	 * @since 1.0.4
+	 *
+	 * @param array<string,mixed> $event The event array being assembled.
+	 * @param array<string,mixed> $args  Payload args passed to {@see build_payload()}.
+	 * @return array<string,mixed> The event array with optional fields appended.
+	 */
+	protected static function append_optional_event_fields( array $event, array $args ): array {
+		if ( ! empty( $args['event_source_url'] ) ) {
+			$event['event_source_url'] = $args['event_source_url'];
+		}
+
+		if ( isset( $args['user_data']['click_id'] ) ) {
+			$event['click_id'] = $args['user_data']['click_id'];
+		}
+
+		if ( isset( $args['user_data']['user'] ) ) {
+			$event['user'] = $args['user_data']['user'];
+		}
+
+		return $event;
+	}
+}

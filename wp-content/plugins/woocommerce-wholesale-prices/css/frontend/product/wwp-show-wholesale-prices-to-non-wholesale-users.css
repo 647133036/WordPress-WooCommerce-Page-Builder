@@ -1,0 +1,170 @@
+/*=====================================================================================================================
+  SHOW WHOLESALE PRICE TO NON-WHOLESALES
+=====================================================================================================================*/
+.wwp_show_wholesale_prices_link {
+    padding-left: 0px;
+    padding-top: 5px;
+}
+
+.wwp_show_wholesale_prices_link span {
+    border: none;
+    width: max-content;
+}
+
+a.wwp_show_wholesale_prices_link:active,
+a.wwp_show_wholesale_prices_link:focus {
+    outline: 0;
+    border: none;
+    -moz-outline-style: none;
+}
+
+.wwp_show_wholesale_prices_text {
+    width: 100%;
+    float: left;
+    margin-bottom: 20px;
+}
+
+/*
+ * Composite products render their add-to-cart form as a positioned element. A floated link is out of flow,
+ * so the form would be laid out on top of it and swallow the click. Keep the link in normal flow instead.
+ */
+.product-type-composite .wwp_show_wholesale_prices_text {
+    float: none;
+}
+
+/* Fix Woostify */
+.woostify-container .wwp_show_wholesale_prices_text {
+    margin-top: -10px;
+}
+
+/* Fix for Electro Theme */
+.electro-price .wwp_show_wholesale_prices_text {
+    font-size: 14px;
+}
+
+/*
+*/
+.wwp-wwlc-inactive {
+    border-left-color: #348dd6;
+    flex-direction: column;
+}
+.wwp-wwlc-inactive .checked {
+    color: orange;
+}
+
+.wwp-wwlc-inactive .discounted {
+    color: rgb(5, 160, 83);
+}
+
+/* needed to position the spinner correctly */
+.wwp-see-wholesale-prices-popover .loading {
+    height: 50px;
+    position: relative;
+}
+
+/* credit: http://stephanwagner.me/only-css-loading-spinner */
+@keyframes wwp-show-wholesale-prices-spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes wwp-show-wholesale-prices-spinner {
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+.tippy-tooltip.wwp-tippy-show-wholesale-price-theme .tippy-content .spinner {
+    min-width: 24px;
+    min-height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.tippy-tooltip.wwp-tippy-show-wholesale-price-theme .tippy-content .spinner:before {
+    content: "Loading…";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+}
+
+.tippy-tooltip.wwp-tippy-show-wholesale-price-theme .tippy-content .spinner:not(:required):before {
+    content: "";
+    border-radius: 50%;
+    border-top: 2px solid #03ade0;
+    border-right: 2px solid transparent;
+    animation: wwp-show-wholesale-prices-spinner 0.6s linear infinite;
+    -webkit-animation: wwp-show-wholesale-prices-spinner 0.6s linear infinite;
+}
+
+.tippy-tooltip.wwp-tippy-show-wholesale-price-theme .tippy-content .form-control {
+    display: inline;
+    border: 0;
+    width: auto;
+}
+
+#log-in.form-control,
+#lost-password.form-control {
+    padding: 0;
+}
+
+/* Tippy Popper Theme */
+.tippy-tooltip.wwp-tippy-show-wholesale-price-theme {
+    padding: 0;
+    text-align: left;
+}
+
+.tippy-tooltip.wwp-tippy-show-wholesale-price-theme .tippy-header {
+    padding: 0.5rem 1rem;
+    background-color: #f0f0f0;
+}
+
+.tippy-tooltip.wwp-tippy-show-wholesale-price-theme .tippy-header i.fa {
+    font-size: 1rem;
+}
+
+.tippy-tooltip.wwp-tippy-show-wholesale-price-theme .tippy-header h4 {
+    margin-bottom: 0;
+}
+
+.tippy-tooltip.wwp-tippy-show-wholesale-price-theme .tippy-inner-content .wholesale_price_container {
+    display: flex;
+    padding: 0.8em 0;
+}
+
+.tippy-tooltip.wwp-tippy-show-wholesale-price-theme .tippy-inner-content {
+    padding: 0.5rem 1rem;
+    min-width: 280px;
+}
+
+.tippy-tooltip.wwp-tippy-show-wholesale-price-theme .tippy-inner-content .wholesale_price_container ins {
+    margin-left: auto;
+}
+
+.tippy-tooltip.wwp-tippy-show-wholesale-price-theme .tippy-inner-content .register-link {
+    margin: 0.8rem 0;
+}
+
+.tippy-tooltip.wwp-tippy-show-wholesale-price-theme .tippy-inner-content .wholesale_price_container.wholesale_price_container--onsale .wholesale_price_title {
+    margin-right: 1em;
+}
+
+.tippy-tooltip.wwp-tippy-show-wholesale-price-theme .tippy-inner-content .wholesale_price_container.wholesale_price_container--onsale del {
+    margin-left: auto;
+}
+
+.tippy-tooltip.wwp-tippy-show-wholesale-price-theme .tippy-inner-content .wholesale_price_container.wholesale_price_container--onsale ins {
+    margin-left: .28575em;
+}
+
+/*=====================================================================================================================
+  WWOF v2 CSS Tweaks
+  TODO: Remove when WWOF is in v2.0
+=====================================================================================================================*/
+
+body .ant-modal-content .add-to-cart {
+    clear: both;
+}

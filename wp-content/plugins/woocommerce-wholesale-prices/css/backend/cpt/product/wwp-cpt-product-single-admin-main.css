@@ -1,0 +1,138 @@
+/* WordPress 4.4 and WooCommerce 2.4.10 and above Styling Fixes */
+#general_product_data .show_if_simple .options_group h3 {
+    font-size: 14px; padding: 8px 12px 0 12px; margin: 0; line-height: 1.4;
+}
+
+/* Wholesale price per role and country accordion */
+.wholesale-price-per-role-and-country-accordion {
+    padding: 10px 12px 20px 12px !important;
+}
+.woocommerce_variable_attributes .wholesale-price-per-role-and-country-accordion {
+    padding: 10px 0 20px 0 !important;
+}
+.wholesale-price-per-role-and-country-accordion h4 {
+    outline: none;
+    border-radius: 0;
+}
+.wholesale-price-per-role-and-country-accordion .section-container {
+    border-radius: 0;
+}
+.wholesale-price-per-role-and-country-accordion .section-container p label {
+    width: 220px !important;
+    display: inline-block;
+}
+
+.woocommerce_variation .wholesale-price-per-role-and-country-accordion .section-container p label {
+    width: 100% !important;
+}
+
+.woocommerce_variation .wholesale-price-per-role-and-country-accordion .section-container .form-field.wholesale_sale_price_dates_fields p {
+    margin-top: 0;
+}
+
+.wholesale-price-per-role-and-country-accordion .section-container p label,
+.wholesale-price-per-role-and-country-accordion .section-container p .wc_input_price,
+.woocommerce_variation .wholesale-price-per-role-and-country-accordion .section-container .wholesale_sale_price_dates_fields {
+    width: 85%;
+}
+
+.woocommerce_variation .wholesale-price-per-role-and-country-accordion .form-row .wholesale_sale_price_dates_fields .woocommerce-help-tip {
+    float: inherit;
+    margin-bottom: 1em;
+}
+
+.woocommerce_options_panel .wholesale-prices-options-group .simple .description {
+    margin-top: 6px;
+    display: inline-block;
+}
+
+.woocommerce_options_panel .wholesale-price-per-role-and-country-accordion fieldset.form-field, 
+.woocommerce_options_panel .wholesale-price-per-role-and-country-accordion p.form-field {
+    padding-left: 220px!important;
+}
+
+.woocommerce_options_panel .wholesale-price-per-role-and-country-accordion label, 
+.woocommerce_options_panel .wholesale-price-per-role-and-country-accordion legend {
+    margin-left: -220px!important;
+}
+
+.wholesale-price-per-role-and-country-accordion .ui-widget-content a {
+    color: #2271b1;
+}
+
+/* Wholesale prices fields */
+.wholesale-prices-field {
+    padding: 0px 14px;
+    margin-bottom: 20px;
+    display: flex;
+    margin-top: 20px;
+}
+
+.wholesale-prices-field.wholesale-prices-field--variable {
+    padding: 0;
+    flex-direction: column;
+}
+
+.wholesale-prices-field-role-name {
+    width: 150px;
+    font-weight: 600;
+    padding-top: 2px;
+}
+
+.wholesale-prices-field-form-field-container {
+    flex-grow: 1;
+}
+
+.woocommerce_options_panel .wholesale-prices-field-form-field-container .form-field:first-child {
+    padding-top: 0 !important;
+    margin-top: 0px;
+}
+
+.wholesale-prices-field--simple .wholesale-prices-field-form-field-container input[type=text], 
+.wholesale-prices-field--simple .wholesale-prices-field-form-field-container select {
+    width: 50%;
+    max-width: 160px;
+    float: left;
+}
+
+.wholesale-prices-field.wholesale-prices-field--simple .wholesale_sale_price_dates_fields input[type=text]:first-of-type,
+.wholesale-price-per-role-and-country-accordion .wholesale_sale_price_dates_fields input[type=text]:first-of-type {
+    margin-bottom: 1em;
+}
+
+.wholesale-prices-field.wholesale-prices-field--variable .wholesale_sale_price_dates_fields p {
+    margin-top: 0;
+}
+
+.woocommerce_options_panel .wholesale_sale_price_dates_fields input[type=text]:nth-of-type(2) {
+    clear: left;
+}
+
+@media (min-width: 1400px) {
+    .wholesale-prices-field-form-field-container input[type=text], 
+    .wholesale-prices-field-form-field-container select {
+        padding: 5px !important;
+    }
+
+    .wholesale-prices-field-form-field-container .description > a, 
+    .wholesale-prices-field-form-field-container a.description {
+        padding-top: 0.5em;
+        display: inline-block;
+    }
+}
+
+@media (max-width: 782px) {
+    .wholesale-prices-field.wholesale-prices-field--simple {
+        flex-direction: column;
+    }
+    
+    .wholesale-prices-field.wholesale-prices-field--simple .wholesale-prices-field-role-name {
+        margin-bottom: 1em;
+    }
+
+    .wholesale-prices-field--simple .wholesale-prices-field-form-field-container input[type=text], 
+    .wholesale-prices-field--simple .wholesale-prices-field-form-field-container select {
+        max-width: initial;
+        width: 80%;
+    }
+}

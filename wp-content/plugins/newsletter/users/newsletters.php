@@ -1,0 +1,60 @@
+<?php
+/** @var NewsletterUsersAdmin $this */
+/** @var NewsletterControls $controls */
+/** @var NewsletterLogger $logger */
+
+defined('ABSPATH') || exit;
+
+$user = $this->get_user((int) $_GET['id'] ?? -1);
+if (!$user) {
+    die('User not found');
+}
+
+?>
+
+<div class="wrap tnp-users tnp-users-edit" id="tnp-wrap">
+
+    <?php include NEWSLETTER_ADMIN_HEADER ?>
+
+    <div id="tnp-heading">
+        <?php $controls->title_help('/subscribers-and-management/') ?>
+        <?php include __DIR__ . '/edit-nav.php' ?>
+    </div>
+
+    <div id="tnp-body">
+
+        <?php $controls->show(); ?>
+<h2><?= esc_html($user->email) ?></h2>
+        <form method="post" action="">
+
+            <?php $controls->init(); ?>
+
+            <div id="tabs">
+
+                <ul>
+                    <li><a href="#tabs-newsletters"><?php esc_html_e('Newsletters', 'newsletter') ?></a></li>
+                </ul>
+
+
+                <div id="tabs-newsletters" class="tnp-tab">
+                    <?php if (!has_action('newsletter_user_newsletters_tab') && !has_action('newsletter_users_edit_newsletters')) { ?>
+                        <p>
+                            This panel requires the <a href="https://www.thenewsletterplugin.com/plugins/newsletter/reports-module" target="_blank">Reports Addon</a>.
+                        </p>
+                        <?php
+                    } else {
+                        do_action('newsletter_user_newsletters_tab', $user->id);
+                        do_action('newsletter_users_edit_newsletters', $user->id);
+                    }
+                    ?>
+                </div>
+
+            </div>
+
+
+        </form>
+    </div>
+
+    <?php include NEWSLETTER_ADMIN_FOOTER; ?>
+
+</div>

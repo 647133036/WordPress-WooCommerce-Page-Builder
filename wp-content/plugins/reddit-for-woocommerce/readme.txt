@@ -1,0 +1,79 @@
+=== Reddit for WooCommerce ===
+Contributors: automattic, woocommerce
+Tags: woocommerce, woo, reddit, product feed, ads
+Tested up to: 7.1
+Stable tag: 1.0.6
+License: GPLv3
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
+
+Integrate your WooCommerce store with Reddit Ads to track conversions and export products for advertising.
+
+== Description ==
+
+Reddit for WooCommerce seamlessly integrates your WooCommerce store with Reddit's powerful advertising platform, enabling you to reach millions of potential customers through engaging visual ads.
+
+Connect your Reddit Business account to automatically sync your product catalog, create targeted advertising campaigns, and track conversions directly from your WooCommerce dashboard. The plugin provides a streamlined setup process with step-by-step guidance to get your first campaign running quickly.
+
+Key features include product catalog export for Reddit's Dynamic Ads, Conversion tracking to measure campaign performance, and Pixel tracking to build custom audiences. The integration works through WooCommerce's Marketing menu, providing a familiar interface for managing your Reddit advertising alongside other marketing channels.
+
+Whether you're looking to increase brand awareness, drive sales, or re-engage existing customers, Reddit for WooCommerce provides the tools you need to create effective advertising campaigns that convert visitors into customers.
+
+== Instructions ==
+Getting started with the Reddit for WooCommerce plugin is quick and easy! Just follow these simple steps:
+
+1. Install and activate the plugin.
+	- Once activated, go to **Marketing → Reddit** in your WordPress dashboard.
+2. Connect your WordPress.com account.
+	- On the setup screen, click **Connect** next to **WordPress.com** and sign in.
+3. Connect your Reddit Business account.
+	- Click **Connect** next to **Reddit** and follow the on-screen steps to sign in to your Reddit Business account.
+4. Complete the setup.
+	- Once both accounts are connected, click **Continue** to complete the setup process.
+5. Manage your settings.
+	- You’ll be taken to the settings page where you can turn **Conversions tracking** on or off anytime, or disconnect Reddit if needed.
+6. Verify everything is working.
+	- In your Reddit Event Manager, confirm that events are being tracked correctly.
+	- Check that your product catalog appears in your Reddit dashboard and that your products are syncing properly.
+
+== Instructions to build the plugin ==
+
+- Requires node v20 and NPM v10.
+- Requires PHP composer v2.
+- Run `npm ci && npm run build` in the plugin's root.
+- Use the generated `reddit-for-woocommerce.zip` file.
+
+== External services ==
+
+This plugin connects to a [Reddit](https://www.reddit.com) Business account to automatically sync the product catalog and track pixel and conversions events. For pixel tracking, the plugin loads the pixel script from https://www.redditstatic.com/ and sends product details, order totals, user IP address, and user agent information in the event payload if user has given consent.
+
+This service is provided by "Reddit, Inc.": [terms of use](https://redditinc.com/policies/user-agreement), [privacy policy](https://www.reddit.com/policies/privacy-policy).
+
+== FAQ ==
+
+= Does the plugin use any external services? =
+Yes, it uses a [Jetpack](https://jetpack.com/) account to connect and communicate with the [Reddit](https://www.reddit.com) API.
+
+== Changelog ==
+
+= 1.0.6 - 2026-09-08 =
+* Fix - Set required `bid_type` of `CPM` when creating a Reddit ad group, fixing "Request failed" errors that blocked onboarding completion.
+* Fix - AddToCart CAPI events now carry a non-empty conversion ID for the `?add-to-cart=` flow.
+* Fix - Include the event source URL in Reddit Conversions API payloads, improving domain detection and click ID fallback matching.
+* Fix - Send PageVisit and ViewContent Conversions API events asynchronously so they no longer block the visitor's page load.
+* Tweak - Bump WooCommerce "tested up to" version to 11.1.
+* Tweak - Include pixel ID query parameter in the Reddit Pixel script URL.
+
+= 1.0.5 - 2026-08-19 =
+* Fix - Validate the order key before firing the Reddit purchase pixel on the order-received page, preventing order details from being exposed to unauthenticated visitors.
+* Dev - Update WPCS to 3.4.1 to fix CVE-2026-45293, an arbitrary code execution vulnerability in WordPress Coding Standards.
+* Tweak - Bump WordPress "Tested up to" version to 7.1
+* Tweak - Bump WordPress "Requires at least" version to 6.9
+
+= 1.0.4 - 2026-07-20 =
+* Add - Include partner details in Reddit Pixel and CAPI requests.
+* Add - Include Pixel ID when creating new campaigns.
+* Add - Add RTL support.
+* Fix - Fix disconnect failure when the Catalog Manager role is removed after initial setup.
+* Dev - Scope Reddit JS bundle to load only on the Reddit admin page.
+
+[See changelog for all versions](https://raw.githubusercontent.com/woocommerce/reddit-for-woocommerce/trunk/changelog.txt).

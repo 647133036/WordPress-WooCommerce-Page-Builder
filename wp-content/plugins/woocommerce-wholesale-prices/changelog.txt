@@ -1,0 +1,520 @@
+== WooCommerce Wholesale Prices Changelog ==
+
+= 2.3.0 =
+* Feature: New AI / MCP settings tab to connect your store to AI assistants such as Claude, ChatGPT, and Cursor through StoreAgent
+* Feature: Add WordPress Abilities API support, so AI assistants and automation tools can get and set wholesale prices and list wholesale customers
+* Improvement: Speed up the List Wholesale Customers ability by no longer looking up each customer's last order one at a time
+* Improvement: Remove unused bundled code to make the plugin smaller
+* Improvement: Show the variations dropdown on variable products when 'Hide Price and Add to Cart button' is enabled
+* Improvement: Record every Wholesale Suite ability call in an audit log on WordPress 7.1 and later
+* Improvement: Show the Getting Started notice in the WooCommerce Inbox
+* Improvement: Speed up product saves by clearing the wholesale price range cache for all roles in one step
+* Bug Fix: Classic Cart page shows the wholesale price before quantity-based discounts after a page reload
+* Bug Fix: Composite products: the wholesale price popover stays empty for non-wholesale customers
+* Bug Fix: Settings number fields that allow negative values don't accept negative numbers
+* Bug Fix: Usage tracking reports the Wholesale Lead Capture version as the Wholesale Payments version
+* Bug Fix: Wholesale price doesn't display on a variable product after the Set Wholesale Price ability updates one of its variations
+* Bug Fix: WPML Multicurrency and WooCommerce Payments: REST API price HTML shows the wrong currency symbol
+* Bug Fix: Advanced Dynamic Pricing rules override the wholesale price
+* Bug Fix: Onboarding card shows a completed step as incomplete for up to one minute
+* Bug Fix: List Wholesale Customers ability denies access to subsite admins and shop managers on Multisite
+
+= 2.2.0.2 =
+* Bug Fix: PHP Fatal error when bool is given to `array_merge()` call
+
+= 2.2.0.1 =
+* Improvement: Autoload option for the plugin settings are now set to `off` by default
+* Bug Fix: Wholesale Fixed Prices On Variations Are Deleted After Editing Regular Price
+
+= 2.2.0 =
+* Feature: Cart/Checkout Blocks Compatibility
+* Feature: Wholesale Payments product education page
+* Improvement: Cart/Checkout legacy - show crossed-out retail amount if item is added as discounted
+* Improvement: Allow custom roles to view top-level settings page
+* Improvement: Removes unnecessary `save()` call when adding order items meta
+* Improvement: Add wholesale_price_with_tax to the variation data on the single product page form
+* Improvement: Adds usage tracking for Wholesale Payments plugin
+* Improvement: Removes usage of (get/update/delete)_post_meta for product objects
+* Bug Fix: Broken access control vulnerability
+* Bug Fix: Wholesale settings is not clickable and can't be saved in Safari browser
+* Bug Fix: Metadata value for `wholesale_customer_have_wholesale_price` is not updated properly
+* Bug Fix: Script file integrity checks intermittently causing errors
+* Bug Fix: Dashboard fails to check plugin license status properly
+* Bug Fix: Wholesale price is not updating properly after editing product variations discount percentage and regular price
+* Bug Fix: REST API: Product variations missing when using hide products without wholesale and product category discount
+
+= 2.1.12 =
+* Improvement: shows admin notice to store owners for the new settings page location
+* Improvement: shows spinner and disable the save button for `Save Custom Field`
+* Bug Fix: inline edit not rendering whitelisted HTML tags properly
+* Bug Fix: wholesale role and payment gateway mapping issue
+* Bug Fix: PHP fatal error when `wp_kses_allowed_html()` returns non-array value
+
+= 2.1.11.2 =
+* Bug Fix: settings display correctly in different langauages
+
+= 2.1.11.1 =
+* Bug Fix: group mapping issue on the new settings UI
+
+= 2.1.11 =
+* Improvement: new settings UI
+* Bug Fix: remove the Lead Capture menu when WWLC is already activated
+* Bug Fix: WWPP and WWLC settings UI issues
+* Bug Fix: PHP fatal error on Wholesale dashboard when WWOF is activated
+* Bug Fix: license settings page URL param typo
+* Bug Fix: `save()` function called twice when creating checkout order line item
+* Bug Fix: WordPress admin collapse menu text size overridden by upsell css on license page
+* Bug Fix: missing user name for non-existent user on wholesale dashboard recent orders
+
+= 2.1.10 =
+* Improvement: Declare incompatible with WC Cart/Checkout blocks (compatibility work-in-progress)
+* Improvement: Make the new Cart/Checkout blocks incompability notice only shows in WC 8.3+
+* Improvement: Remove Order Form Link from Wholesale > Settings
+* Fix: New Settings UI: Back to the license page gets "You are redirecting to a page. Please wait..."
+* Fix: New Settings UI: External tab link
+* Fix: New Settings UI: Show Wholesale Price to non-wholesale users - some features should be enabled when having WWOF and WWLC activated
+* Fix: New Settings UI: The admin notices are not showing
+* Fix: New Settings UI: The dropdown options of the Wholesale Stock Display Format are getting cut off
+* Fix: PHP 8.2 compatibility
+* Fix: Wholesale percentage discount not following Woocommerce decimal points settings
+* Fix: wholesale percetage discount calculation not following WC number of decimals
+
+= 2.1.9 =
+* Feature: new settings UI via `USE_WWP_NEW_SETTINGS` constant
+* Feature: settings REST API
+* Improvement: integration with Variation Price Display Range for WooCommerce - Pro
+* Bug Fix: dashboard license status data not being cached properly causing slow loading
+
+= 2.1.8 =
+* Improvement: Add new stats to check whether the site HPOS & Cart/Checkout page is using block-based template or not
+* Improvement: HPOS compatibility
+* Bug Fix: Coloring disappeared on Upgrade To Premium menu item
+* Bug Fix: Fatal error when opening wholesale help page
+* Bug Fix: The regular customer's orders are populated into the wholesale dashboard when enabling the HPOS
+* Bug Fix: WWOF V2: Wholesale price html doesn't show up on the order form
+* Bug Fix: Incorrect upsell link of Wholesale Suite on General page (400 Bad Request)
+* Bug Fix: Upsell - Missing the "Add additional wholesale price levels" link or not working properly
+
+= 2.1.7 =
+* Improvement: API: Allow to add null or "" in the wholesale price data to remove it when updating via API
+* Improvement: Add total wholesale revenue and leads data to usage tracking
+* Improvement: Add wholesale price parameter to `wwp_filter_wholesale_price_html` & `wwp_filter_wholesale_price_html_before_return_wholesale_price_only` filter
+* Improvement: Change upgrade to pro on menu to go straight to the site rather than an upgrade page
+* Improvement: Declare plugin incompatibility with WooCommerce HPOS
+* Improvement: PHP 8.1 compatibility
+* Improvement: Remove html tags from all translatable strings
+* Improvement: Restore WWP metadata properties in REST response
+* Improvement: WWP Dashboard - Add Custom Date to Review The Data
+* Bug Fix: API: Error when updating variation without wholesale price
+* Bug Fix: API: Wholesale price html doesn't get altered from when called with REST API
+* Bug Fix: Aelia Currency Switcher: Gets PHP notices when updating the Variable product
+* Bug Fix: Angell Eye Paypal: The "See wholesale prices" tooltip doesn't show when on the single product page when Angell Eye plugin enabled
+* Bug Fix: CRITICAL Uncaught Error: Call to undefined method in WooCommerce marketing page
+* Bug Fix: Error thrown when duplicating a product
+* Bug Fix: Grouped product: The product name column gets shrinks on the Single product page
+* Bug Fix: See wholesale price modal is empty when having a general discount setting
+* Bug Fix: The crossed regular price also display the wholesale price and it's min and increment details
+* Bug Fix: Wholesale Sale Price: The price displays improper on the show wholesale price to non-wholesale customer
+
+= 2.1.6.2 =
+* Bug Fix: Might encounter a fatal error when visiting coupons page.
+
+= 2.1.6.1 =
+* Improvement: Improved compatibility with 3rd party plugins & themes for show wholesale to non-wholesale feature
+
+= 2.1.6 =
+* Feature: Display the wholesale sale price on the admin Products page
+* Improvement: Add a action hook on wholesale price field to add the Wholesale Sale Price feature to be implemented in WWPP
+* Improvement: Add hook on aelia currency switcher wholesale price field section and tidy up css
+* Improvement: Remove 'class-wwp-cache.php' file as it is not being used
+* Improvement: Remove API key creation and retrieval from WWP API and in code base
+* Improvement: Remove API usage on Show Wholesale Prices to Non Wholesale Users feature
+* Improvement: Shop Managers Should Have Access to Wholesale Dashboard
+* Bug Fix: Backend CSS for percentage based pricing on product edit screen is not scoped properly
+* Bug Fix: Fix typo on usage tracking notice
+* Bug Fix: Show Wholesale Price to non-wholesale users feature not showing on product category page
+* Bug Fix: The schedule of sale price is not working when WWP is enabled
+* Bug Fix: The See wholesale prices text to non-wholesale users still show up on the shop and product pages when only the location in wholesale order form is selected
+
+= 2.1.5.1 =
+* Bug Fix: Important security fixes
+
+= 2.1.5 =
+* Bug Fix: API: Add additional condition or filter that will check if general discount is set for the current wholesale user
+* Bug Fix: Wholesale Price Suffix {price_including_tax} not displaying correct price
+* Bug Fix: Product Widget shows Prices when "Hide Prices and Add to cart button " feature is enabled
+* Bug Fix: Changing product type from variable to simple won't show Wholesale Prices fields
+* Bug Fix: JavaScript Error in the Variation tab when YITH Pre Order for WooCommerce plugin is active
+* Improvement: Legacy Code Cleanup: Remove old codes in class-wwp-helper-functions.php
+* Improvement: Legacy Code Cleanup: Remove old code in class-wwp-order.php
+
+= 2.1.4 =
+* Bug Fix: PHP notices shown when updating to version 2.1.3
+* Bug Fix: Divi Page Builder compatibility
+
+= 2.1.3 =
+* Improvement: Wholesale Prices Premium minimum version requirement notice adjustments
+* Improvement: Update Wholesale Suite logos to the latest version
+* Bug Fix: When "Show Wholesale Price to non-wholesale users" is toggled off, text is still displayed in WWOF v2
+
+= 2.1.2 =
+* Improvement: Add email capture box for PDF download to the Wholesale Prices->General settings
+* Improvement: Convert Wholesale Menu Logo to Gray
+* Improvement: Add a "lite" bar notice at the top of dedicated WooCommerce Wholesale Prices page
+* Improvement: Add a links to the new WooCommerce Home screen as per WC core recommendations
+* Bug Fix: Regular price range on variable product is cached but not cleared when changing the "Prices entered with tax" setting
+
+= 2.1.1 =
+* Feature: About & Help pages under new menu
+* Improvement: Improve plugin education notices on dashboard page & menu
+* Improvement: Standardize UTM links back to Wholesale Suite website
+* Improvement: Some text not translatable
+* Improvement: Make the wholesale percentage discount field to have maximum value of 100
+* Bug Fix: No link on the recommended plugin notice on Show Wholesale Prices to Non-Wholesale Customers settings area
+* Bug Fix: PHP Warning: unserialize() expects parameter 1 to be string
+* Bug Fix: Changing regular price on a simple product that has fixed wholesale price will empty the wholesale price
+* Bug Fix: Per-product percentage discount: The price is always calculated with . as the decimal separator even though the site uses another separator
+
+= 2.1 =
+* Feature: Allow users to set wholesale prices on products via fixed prices or a percentage discount from retail price.
+
+= 2.0.2 =
+* Improvement: Code improvements
+* Bug Fix: The wholesale price of a grouped product aren't displayed
+* Bug Fix: Remove wholesale price fields on un-supported product types
+* Bug Fix: PHP notice shown when creating wc store order manually in the backend
+
+= 2.0.1 =
+* Improvement: Italian text translation
+* Improvement: Add a class or ID to "Hide Price and Add to cart Feature"
+* Improvement: Dashboard code improvements
+* Improvement: Add extra parameter to wwp_filter_wholesale_price_display_suffix filter
+* Bug Fix: Error when a wholesale customer login
+* Bug Fix: Pressing Enter to submit changes on the Price setting tab will force regenerate WC API key
+* Bug Fix: JS Error on Wholesale Dashboard Page
+
+= 2.0 =
+* Feature: New dedicated wholesale menu
+* Feature: New wholesale dashboard
+* Improvement: Code improvements
+* Bug Fix: Add "wholesale price with tax" property value when fetching wholesale prices data
+
+= 1.16.1 =
+* Improvement: Add a filter to the return value of base price in the "get_wholesale_price_suffix" function in class-wwp-wholesale-prices.php
+* Improvement: Show Wholesale Price to non-wholesale users: Add WooCommerce API authentication to access wholesale API endpoint
+* Improvement: French translation
+* Bug Fix: Show Wholesale Price to non-wholesale users: The "Click to see wholesale prices" displays twice on variable product
+* Bug Fix: Theme Compatibility with Electro
+* Bug Fix: Hide price and add to cart button feature doesn't work as intended on Avada theme and other themes
+
+= 1.16 =
+Note: If Wholesale Prices Premium is present and active, minimum requirement is version 1.27
+
+* Feature: API: Ability to do batch updates (Create, Update, Delete)
+* Bug Fix: API: Able to get a specific variation with wholesale_role set to a regular customer or a wrong role
+* Bug Fix: API: Updating product and variation with wrong wholesale price format won't show any error
+* Bug Fix: API: When getting a whoelsale product or variation with return_wholesale_products set to true it will say it's not a wholesale product
+
+= 1.15.3 =
+* Bug Fix: Theme conflicts with css introduced with version 1.15
+* Bug Fix: JS console errors in the admin introduced with version 1.15
+
+= 1.15.2 =
+* Bug Fix: Only load the styles that is used for the popover for showing wholesale prices to avoid clashing with theme styles
+
+= 1.15.1 =
+* Improvement: Increase the speed of the popup when clicking "Click to see wholesale prices"
+* Bug Fix: Issue related to register button/links styling in Wholesale Lead Capture when WWP 1.15 is activated
+
+= 1.15 =
+* Big Feature: Show Wholesale Price to Non-Wholesale Users
+* Feature: Order type filtering
+* Improvement: Code improvements
+
+= 1.14.2 =
+* Bug Fix: PHP 8 Compatibility
+* Bug Fix: Uncaught Error: Call to undefined function wp_get_current_user()
+* Bug Fix: Comma as decimal separator is being changed when you export a file (CSV)
+
+= 1.14.1 =
+* Bug Fix: Get double Restrict To Wholesale Roles option on product editor
+
+= 1.14 =
+* Improvement: Major code improvements
+* Bug Fix: API: When fetching a variation it displays the variable regular price range instead of the regular price of the variation
+
+= 1.13.3 =
+* Improvement: WWP API Improvement
+
+= 1.13.2 =
+* Bug Fix: WC 4.9 API: PHP warning and notice when running wholesale API
+
+= 1.13.1 =
+* Improvement: Security fixes
+* Improvement: French Translation
+
+= 1.13 =
+* Feature: Hide Price and Add to Cart Button for Non-Logged In User
+* Improvement: Translation enhancement
+* Improvement: WC 4.8 compatibility
+* Bug Fix: WC 4.8: Fix deprecated error with WooCommerce set_status function
+* Bug Fix: Broken image under "Recommended coupon extensions"
+* Bug Fix: PHP Warning:  fopen show up when only WWP is installled
+* Bug Fix: WPML Translation Management: When this plugin is active when an Admin updates the Order shipping fee for Wholesale Order, it'll revert the price back to the retail price
+
+= 1.12.1 =
+* Bug Fix: Aelia Currency Switcher for WooCommerce have some issues after WWP 1.12 release
+
+= 1.12 =
+* Feature: Add support for WooCommerce Currency Switcher plugin
+* Feature: WWP API: Add new feature to manipulate wholesale products and wholesale roles via REST namespace wholesale/v1/products and wholesale/v1/roles
+* Improvement: Update to new product boxes on upgrade page
+* Improvement: Improve product education near wholesale pricing fields
+* Improvement: Code improvements
+
+= 1.11.11 =
+* Improvement: WC 4.4 compatibility
+* Improvement: WP 5.5 compatibility
+* Improvement: Code improvements
+
+= 1.11.10 =
+* Bug Fix: Minor error on WC 4.3 and our PDFs don't show up on WC 4.2 in WC Marketing Knowledge Base page
+
+= 1.11.9 =
+* Improvement: Compatibility with WC 4.3
+* Improvement: WC 4.3: Remove the set_icon function for admin notes since it's deprecated
+* Bug Fix: WC 4.3: Fatal error when updating WC 4.2 to WC 4.3 when WWP enabled
+* Bug Fix: Wholesale Price Suffix calculated incorrectly when setting Price display suffix as "{price_including_tax} TAX"
+* Bug Fix: WC Admin Note: Unable to install ACFWF after re-log in as admin
+* Bug Fix: WC 4.3: Our PDFs doesn't show up in WC Marketing page's Knowledge Base
+
+= 1.11.8 =
+* Bug Fix: When the WooCommerce Admin is inactive, Fix the potential issue produced upon plugin activation
+
+= 1.11.7 =
+* Bug Fix: Add checks for WC Admin package inclusion
+
+= 1.11.6 =
+* Bug Fix: Patch legacy conflict with WC 3.9.x versions
+
+= 1.11.5 =
+* Improvement: Compatibility check with WooCommerce 4.2
+* Bug Fix: Unable to import decimals when importing wholesale price using a comma
+* Bug Fix: Price display suffix is not working for wholesale customers
+
+= 1.11.4 =
+* Improvement: Compatibility check with WooCommerce 4.1.0
+
+= 1.11.3 =
+* Improvement: Integration of the new WooCommerce navigation bar
+* Improvement: Minor code improvements
+
+= 1.11.2 =
+* Improvement: Compatibility check with WooCommerce 4
+
+= 1.11.1 =
+* Improvement: Better manage when and where the getting started notice appears
+
+= 1.11 =
+* Improvement: Show a getting started guide on activation
+* New Feature: Add ability to change wholesale price text in settings
+* New Feature: Allow changing of built-in "Wholesale Customer" role display name
+* New Feature: Allow disabling coupons for wholesale customers
+* New Feature: Allow hiding of original price for wholesale customers
+
+= 1.10 =
+* Improvement: WooCommerce 3.7 compatibility
+* Improvement: Code improvements
+
+= 1.9 =
+* Improvement: Code improvements
+
+= 1.8: =
+* Bug Fix: Wholesale secondary currency from Aelia Currency Switcher doesn't display after importing
+* Improvement: Minor code improvements
+
+= 1.7 =
+* Bug Fix: The {price_excluding_tax} and {price_including_tax} uses regular price instead of wholesale price when added in Price display suffix
+* Bug Fix: Deleting the variation with wholesale price will not remove the "*variations_with_wholesale_price" set in the variable
+
+= 1.6.5 =
+* Improvement: Updating WooCommerce 3.4.0 compatibility notice
+
+= 1.6.4 =
+* Improvement: Aelia Currency Switcher for WooCommerce plugin reintegration
+* Improvement: Minor code improvements
+
+= 1.6.3 =
+* Improvement: Add min width for wholesale price column on product's backend
+* Improvement: Add a filter at the end of get_product_wholesale_price_on_shop_v2() function for user to hook
+* Bug Fix: Error notices shown with site having Aelia Currency Switcher installed
+
+= 1.6.2 =
+* Improvement: Minor code improvements
+
+= 1.6.1 =
+* Improvement: Minor code improvements
+
+= 1.6.0 =
+* Improvement: Dramatically enhance performance
+* Improvement: Major code improvements
+* Improvement: Remove some deprecated functions
+* Bug Fix: WPML broken integration with the wwp_formatted_price function
+
+= 1.5.2 =
+* Improvement: Minor code improvements
+
+= 1.5.1 =
+* Bug Fix: Add support for outdated (5.4) php versions
+
+= 1.5.0 =
+* Improvement: Considerably improve plugin speed and performance
+* Improvement: Improve codebase
+
+= 1.4.5 =
+* Bug Fix: Support for old php versions
+
+= 1.4.4 =
+* Improvement: Improve support for WC duplicate product feature
+* Improvement: Minor code improvements
+
+= 1.4.3 =
+* Bug Fix: Issues with multisite install
+
+= 1.4.2 =
+* Improvement: Minor code improvements
+
+= 1.4.1 =
+* Bug Fix: Errors thrown when wwpp less than 1.14.0 is active thus preventing wwpp update
+
+= 1.4.0 =
+* Feature: Add WPML support
+* Improvement: Add compatibility with upcoming WooCommerce version 3.0.0
+* Improvement: Major code refactor for effeciency , speed and maintanability
+
+= 1.3.2 =
+* Bug Fix: Wholesale prices not showing properly on variable products with huge number of variations
+
+= 1.3.1 =
+* Improvement: Add compatibility with upcoming WooCommerce version 2.7.0
+* Improvement: Refactor codebase for effeciency and maintanability
+
+= 1.3.0 =
+* Feature: Multi Site Compatibility
+* Improvement: Apply a wrapping css class name to the wholesale options on product edit screens
+* Improvement: Embed new data on cart/orders for more accurate reporting in the future
+* Improvement: Major code refactor for effeciency , speed and maintanability
+* Bug Fix: Fatal error: Class 'WWP_Helper_Functions' not found
+* Bug Fix: Fix typo in filter 'wwof_settings_section_content', should be wwp not wwof
+* Bug Fix: When changing product categories on variable product and dont open variations tab, have_wholesale_price meta on parent variable product is not set properly
+* Bug Fix: Deactivate function callback is not firing
+
+= 1.2.10 =
+* Bug Fix: Rebase keys on array returned on getUserWholesaleRole
+* Bug Fix: Error notice relating to array_intersect on getUserWholesaleRole function
+
+= 1.2.9 =
+* Improvement : Rename "plugin settings" to just "settings" on the plugin listing
+* Bug Fix: Properly check for dependencies and properly trigger activation code base
+* Bug Fix: If you modify an attribute then attempt to bulk set wholesale pricing it doesn't show the input alert box
+* Bug Fix: Tidy up code base, remove unnecessary codes
+
+= 1.2.8 =
+* Improvement: If no price set for a product, don't bother to construct wholesale price html
+* Bug Fix: Doesn't seem to properly change the price html
+
+= 1.2.7 =
+* Bug Fix: Duplicate wholesale price shows when all variations have the same regular and wholesale price
+
+= 1.2.6 =
+* Bug Fix: Pricing accordion for Aelia currency switcher broken on simple products
+
+= 1.2.5 =
+* Bug Fix: WC2.6.0: Display bug with crossed out regular prices when wholesale price is being displayed
+* Bug Fix: When regular prices are left blank on variations, notices are shown (For none wholesale users)
+* Improvement: Add filters for wholesale prices suffix
+
+= 1.2.4 =
+* Bug Fix: Add support for custom product types ( composite, bundle, etc.. ) on calculation of cart on cart widget
+
+= 1.2.3 =
+* Feature: Allow setting of wholesale prices per wholesale role on all variable product variations via custom bulk action
+* Improvement: Tidy up internationalization
+* Improvement: Tidy up code base for extensibility
+
+= 1.2.2 =
+* Improvement: Add additional hooks to settings code base for better extensibility.
+
+= 1.2.1 =
+* Bug Fix: When aelia currency switcher plugin is not present, variations of a variable product has some issues on displaying wholesale price on the backend
+
+= 1.2.0 =
+* Feature: Integrate to Aelia Currency Switcher Plugin
+* Bug Fix: When variable product has same regular price, wholesale price don't get displayed on the front end.
+* Bug Fix: Properly mark products with wholesale price if its category is later updated with a wholesale discount ( WWPP )
+* Bug Fix: UI fixes required for WC 2.5 & WP 4.4
+* Improvement: Update upgrade notice screenshot on settings page
+
+= 1.1.7 =
+* Improvement: Code enhancements
+
+= 1.1.6 =
+* Bug Fix: Fix "Only Show Wholesale Products To Wholesale Users" option behaviour when variations of a variable product is paginated
+
+= 1.1.5 =
+* Bug Fix: Bug fixes and code enhancements
+
+= 1.1.4 =
+* Bug Fix: Fix duplicate failure to meet wholesale price notice
+* Improvement: Tidy up internationalization code base
+
+= 1.1.3 =
+* Improvement: Improve integration to WooCommerce 2.4.x series new "Save Changes" button on the variations section of a variable product
+
+= 1.1.2 =
+* Improvement: Refactor activation code making the plugin more efficient
+* Improvement: Integrate to WooCommerce 2.4.x series new "Save Changes" button on the variations section of a variable product
+* Feature: Add current user wholesale role on the class of the body tag
+
+= 1.1.1 =
+* Bug Fix: Fix price suffix doubling up on variable products
+
+= 1.1.0 =
+* Improvement: Add additional helper functions
+* Improvement: Enhance cleaning up procedures on deactivation
+* Improvement: Translation ready
+
+= 1.0.9 =
+* Bug Fix: Properly display wholesale pricing when changing product types
+* Bug Fix: Properly display product price range for variable products
+
+= 1.0.8 =
+* Bug Fix: Improve European style prices support
+
+= 1.0.7 =
+* Bug Fix: Refactor logic on implementation of minimum price requirements
+
+= 1.0.6 =
+* Bug Fix: Properly mark wholesale products if wholesale price is set
+* Minor Feature: Add additional filter and action hooks
+
+= 1.0.5 =
+* Bug Fix: Allow saving of European style prices ( comma used as decimal separator )
+
+= 1.0.4 =
+* Bug Fix: Add additional meta flags to be used within the loop to determine if products have wholesale prices defined
+
+= 1.0.3 =
+* Bug Fix: Refactor logic of applying wholesale price to variable product variation
+
+= 1.0.2 =
+* Bug Fix: Add some meta flags to be used within the loop to determine if products have wholesale prices defined
+* Bug Fix: Tidy up data displayed on the custom wholesale prices column on the product listing page on the backend
+
+= 1.0.1 =
+* Feature: Added wholesale price columns to Product listing page on backend
+* Feature: Added preview of settings available in Premium
+* Feature: Added link to settings page from installed plugins screen
+
+= 1.0.0 =
+* Initial version

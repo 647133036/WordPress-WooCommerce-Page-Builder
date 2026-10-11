@@ -1,0 +1,17 @@
+#flutterwave-button {
+    background-color: #f5a623;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 14px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+    width: 100%;
+}

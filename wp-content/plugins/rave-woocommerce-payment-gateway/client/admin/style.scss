@@ -1,0 +1,916 @@
+@use './fonts';
+
+/**
+ * Flutterwave admin styles.
+ *
+ * Scoped under .flw-admin-root so nothing leaks into the rest of wp-admin, and
+ * the WordPress page wrapper padding is neutralised so the screen sits flush
+ * against the admin chrome the way the designs show it.
+ */
+
+$flw-orange: #ff9b00;
+$flw-orange-soft: #fdc46b;
+$flw-orange-ink: #7a4a00;
+$flw-ink: #101828;
+$flw-body: #475467;
+$flw-muted: #98a2b3;
+$flw-border: #d0d5dd;
+$flw-line: #eaecf0;
+$flw-surface: #ffffff;
+$flw-radius: 8px;
+$flw-container: 1560px;
+$flw-gutter: 48px;
+$flw-serif: 'Millik', 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+$flw-sans: 'Moderat', 'Inter', -apple-system, blinkmacsystemfont, 'Segoe UI', roboto, 'Helvetica Neue', arial, sans-serif;
+
+/* Neutralise the wp-admin content padding for our full-bleed page. */
+#wpcontent:has(.flw-admin-root) {
+	padding-left: 0;
+}
+
+.flw-admin-root {
+	background: $flw-surface;
+	color: $flw-ink;
+	font-family: $flw-sans;
+	font-size: 14px;
+	line-height: 1.5;
+	min-height: calc(100vh - 32px);
+
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+
+	a {
+		color: $flw-orange;
+		font-weight: 500;
+		text-decoration: underline;
+
+		&:hover,
+		&:focus {
+			color: #d68300;
+		}
+	}
+
+	h1,
+	h2 {
+		font-family: $flw-serif;
+		font-weight: 400;
+		margin: 0;
+	}
+}
+
+/* -------------------------------------------------------------------------- */
+/* Page shell                                                                 */
+/* -------------------------------------------------------------------------- */
+
+/* The screen is centred in a container rather than hugging the admin sidebar,
+   and the two columns follow the ~1.4:1 form-to-stepper ratio from the designs
+   instead of two fixed widths. */
+.flw-page {
+	&__crumb {
+		border-bottom: 1px solid $flw-line;
+	}
+
+	&__crumb-inner {
+		align-items: center;
+		display: flex;
+		margin: 0 auto;
+		max-width: $flw-container;
+		min-height: 56px;
+		padding: 0 $flw-gutter;
+		width: 100%;
+	}
+
+	&__body {
+		display: block;
+		margin: 0 auto;
+		max-width: $flw-container;
+		padding: 40px $flw-gutter 80px;
+
+		/* The designs put the form, the gutter between the columns and the
+		   stepper in a 774:184:500 ratio. Encoding that directly — including
+		   the gap as a percentage of the same track — keeps the proportions
+		   identical at any width instead of approximating them. */
+		&.has-aside {
+			column-gap: 12.6%;
+			display: grid;
+			grid-template-columns: minmax(0, 774fr) minmax(0, 500fr);
+			row-gap: 40px;
+		}
+	}
+
+	&__main {
+		min-width: 0;
+	}
+}
+
+.flw-crumb-btn {
+	align-items: center;
+	background: none;
+	border: 0;
+	color: $flw-ink;
+	cursor: pointer;
+	display: inline-flex;
+	font-size: 14px;
+	font-weight: 500;
+	gap: 10px;
+	padding: 8px 0;
+
+	&--static {
+		cursor: default;
+	}
+
+	&:hover:not(&--static) {
+		color: $flw-orange;
+	}
+}
+
+/* -------------------------------------------------------------------------- */
+/* Typography                                                                 */
+/* -------------------------------------------------------------------------- */
+
+.flw-heading {
+	font-size: 28px;
+	letter-spacing: -0.01em;
+	margin: 16px 0 4px;
+}
+
+.flw-subheading {
+	color: $flw-body;
+	margin: 0;
+}
+
+.flw-rule {
+	background: $flw-orange-soft;
+	border: 0;
+	height: 2px;
+	margin: 18px 0 28px;
+}
+
+.flw-step-badge {
+	background: #fcd9a0;
+	border-radius: 4px;
+	color: #4b2e00;
+	display: inline-block;
+	font-size: 12px;
+	padding: 5px 10px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Stepper                                                                    */
+/* -------------------------------------------------------------------------- */
+
+.flw-stepper {
+	border: 1px solid $flw-line;
+	border-radius: 10px;
+	padding: 24px 28px;
+
+	&__item {
+		align-items: center;
+		color: $flw-muted;
+		display: flex;
+		gap: 14px;
+		position: relative;
+
+		&:not(:last-child) {
+			padding-bottom: 26px;
+
+			&::before {
+				background: $flw-line;
+				bottom: 4px;
+				content: '';
+				left: 11px;
+				position: absolute;
+				top: 24px;
+				width: 2px;
+			}
+		}
+
+		&.is-done {
+			color: $flw-ink;
+
+			.flw-stepper__dot {
+				background: #d1fadf;
+				border-color: #12b76a;
+				color: #039855;
+			}
+
+			&::before {
+				background: #12b76a;
+			}
+		}
+
+		&.is-active {
+			color: $flw-ink;
+
+			.flw-stepper__dot {
+				background: #e4e7ec;
+				border-color: #98a2b3;
+				color: $flw-ink;
+			}
+		}
+	}
+
+	&__dot {
+		align-items: center;
+		background: $flw-surface;
+		border: 2px solid $flw-border;
+		border-radius: 50%;
+		display: inline-flex;
+		flex: 0 0 auto;
+		height: 24px;
+		justify-content: center;
+		width: 24px;
+	}
+
+	&__label {
+		font-size: 15px;
+	}
+}
+
+/* -------------------------------------------------------------------------- */
+/* Fields                                                                     */
+/* -------------------------------------------------------------------------- */
+
+.flw-field {
+	margin-bottom: 22px;
+
+	&__label {
+		align-items: center;
+		color: $flw-ink;
+		display: flex;
+		font-size: 14px;
+		gap: 6px;
+		margin-bottom: 6px;
+	}
+
+	&__hint,
+	&__error {
+		align-items: flex-start;
+		display: flex;
+		font-size: 13px;
+		gap: 6px;
+		margin: 8px 0 0;
+	}
+
+	&__hint {
+		color: $flw-muted;
+
+		svg {
+			flex: 0 0 auto;
+			margin-top: 2px;
+		}
+	}
+
+	&__error {
+		color: #d92d20;
+	}
+
+	&.has-error .flw-input {
+		border-color: #f04438;
+	}
+}
+
+.flw-input {
+	background: $flw-surface;
+	border: 1px solid $flw-border;
+	border-radius: $flw-radius;
+	color: $flw-ink;
+	display: block;
+	font-family: inherit;
+	font-size: 14px;
+	line-height: 1.4;
+	padding: 12px 14px;
+	width: 100%;
+
+	&::placeholder {
+		color: $flw-muted;
+	}
+
+	/* wp-admin paints its own blue focus ring via `input[type="text"]:focus`,
+	   which outranks a lone class. Restated at higher specificity below. */
+
+	&[readonly] {
+		background: #f9fafb;
+		color: $flw-body;
+	}
+
+	&--area {
+		min-height: 140px;
+		resize: vertical;
+	}
+}
+
+/* wp-admin's forms.css caps every select at 25rem (400px) and styles focus on
+   element selectors, both of which outrank the plain `.flw-input` class. These
+   need the extra specificity to land. */
+.flw-admin-root .flw-input {
+	max-width: none;
+
+	&:focus {
+		border-color: $flw-orange;
+		box-shadow: 0 0 0 3px rgba(255, 155, 0, 0.18);
+		outline: none;
+	}
+}
+
+.flw-admin-root select.flw-input {
+	height: auto;
+	line-height: 1.4;
+	min-height: 0;
+}
+
+.flw-select {
+	position: relative;
+
+	select {
+		appearance: none;
+		cursor: pointer;
+		padding-right: 42px;
+	}
+
+	&__chevron {
+		align-items: center;
+		color: $flw-body;
+		display: flex;
+		height: 100%;
+		pointer-events: none;
+		position: absolute;
+		right: 14px;
+		top: 0;
+	}
+}
+
+.flw-copyfield {
+	display: flex;
+
+	.flw-input {
+		border-bottom-right-radius: 0;
+		border-right: 0;
+		border-top-right-radius: 0;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	&__btn {
+		background: #808080;
+		border: 0;
+		border-radius: 0 $flw-radius $flw-radius 0;
+		color: #fff;
+		cursor: pointer;
+		flex: 0 0 auto;
+		font-size: 14px;
+		min-width: 84px;
+		padding: 0 18px;
+
+		&:hover {
+			background: #6e6e6e;
+		}
+	}
+}
+
+/* -------------------------------------------------------------------------- */
+/* Checkboxes                                                                 */
+/* -------------------------------------------------------------------------- */
+
+.flw-checkbox {
+	align-items: center;
+	cursor: pointer;
+	display: flex;
+	gap: 10px;
+	margin: 6px 0;
+
+	input {
+		height: 0;
+		opacity: 0;
+		position: absolute;
+		width: 0;
+	}
+
+	&__box {
+		align-items: center;
+		background: $flw-surface;
+		border: 1.5px solid $flw-border;
+		border-radius: 4px;
+		color: transparent;
+		display: inline-flex;
+		flex: 0 0 auto;
+		height: 18px;
+		justify-content: center;
+		width: 18px;
+	}
+
+	input:checked + &__box {
+		background: $flw-surface;
+		border-color: $flw-orange;
+		color: $flw-orange;
+	}
+
+	input:focus-visible + &__box {
+		box-shadow: 0 0 0 3px rgba(255, 155, 0, 0.25);
+	}
+
+	&__label {
+		font-size: 14px;
+	}
+}
+
+/* -------------------------------------------------------------------------- */
+/* Buttons                                                                    */
+/* -------------------------------------------------------------------------- */
+
+.flw-actions {
+	display: flex;
+	gap: 16px;
+	margin-top: 34px;
+
+	.flw-btn {
+		flex: 1 1 0;
+	}
+
+	&:not(.has-back) .flw-btn {
+		width: 100%;
+	}
+}
+
+.flw-btn {
+	align-items: center;
+	border: 0;
+	border-radius: $flw-radius;
+	cursor: pointer;
+	display: inline-flex;
+	font-family: inherit;
+	font-size: 15px;
+	font-weight: 500;
+	gap: 10px;
+	justify-content: center;
+	min-height: 48px;
+	padding: 0 28px;
+	transition: background-color 0.15s ease;
+
+	&--primary {
+		background: $flw-orange;
+		color: #1a1a1a;
+
+		&:hover:not(:disabled) {
+			background: #e08c00;
+		}
+
+		&:disabled {
+			background: $flw-orange-soft;
+			color: rgba(26, 26, 26, 0.7);
+			cursor: not-allowed;
+		}
+	}
+
+	&--secondary {
+		background: #808080;
+		color: #fff;
+
+		&:hover:not(:disabled) {
+			background: #6e6e6e;
+		}
+
+		&:disabled {
+			cursor: not-allowed;
+			opacity: 0.6;
+		}
+	}
+
+	&__spinner {
+		animation: flw-spin 0.7s linear infinite;
+		border: 2px solid currentcolor;
+		border-radius: 50%;
+		border-right-color: transparent;
+		height: 16px;
+		width: 16px;
+	}
+}
+
+.flw-link-btn {
+	background: none;
+	border: 0;
+	color: $flw-orange;
+	cursor: pointer;
+	font-family: inherit;
+	font-size: 14px;
+	font-weight: 500;
+	margin-top: 18px;
+	text-decoration: underline;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Tooltip                                                                    */
+/* -------------------------------------------------------------------------- */
+
+.flw-tooltip {
+	color: $flw-muted;
+	cursor: help;
+	display: inline-flex;
+	position: relative;
+
+	&__bubble {
+		background: #2f2f2f;
+		border-radius: 8px;
+		bottom: calc(100% + 10px);
+		color: #fff;
+		font-size: 13px;
+		left: 0;
+		line-height: 1.45;
+		opacity: 0;
+		padding: 12px 14px;
+		pointer-events: none;
+		position: absolute;
+		transition: opacity 0.12s ease;
+		width: 240px;
+		z-index: 20;
+
+		&::after {
+			border: 6px solid transparent;
+			border-top-color: #2f2f2f;
+			content: '';
+			left: 12px;
+			position: absolute;
+			top: 100%;
+		}
+	}
+
+	&:hover &__bubble,
+	&:focus &__bubble,
+	&:focus-visible &__bubble {
+		opacity: 1;
+	}
+}
+
+/* -------------------------------------------------------------------------- */
+/* Welcome                                                                    */
+/* -------------------------------------------------------------------------- */
+
+.flw-welcome {
+	margin: 0 auto;
+	max-width: 1120px;
+	padding: 56px 0 80px;
+	text-align: center;
+
+	.flw-wordmark {
+		height: 32px;
+		width: 200px;
+	}
+
+	&__title {
+		font-size: 46px;
+		line-height: 1.12;
+		margin: 28px 0 20px;
+	}
+
+	&__lede {
+		color: $flw-body;
+		font-size: 16px;
+		margin: 0 auto 34px;
+		max-width: 740px;
+	}
+}
+
+.flw-cards {
+	display: grid;
+	gap: 32px;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	margin-top: 76px;
+	text-align: left;
+}
+
+.flw-card {
+	h2 {
+		font-size: 20px;
+		margin: 20px 0 8px;
+	}
+
+	p {
+		color: $flw-body;
+		margin: 0 0 12px;
+	}
+
+	/* The exported artwork carries its own rounded tinted background, so the
+	   wrapper only has to clip it. */
+	&__art {
+		border-radius: 10px;
+		display: flex;
+		overflow: hidden;
+	}
+}
+
+.flw-illustration {
+	display: block;
+	height: auto;
+	width: 100%;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Payment methods                                                            */
+/* -------------------------------------------------------------------------- */
+
+.flw-methods {
+	border: 1px solid $flw-line;
+	border-radius: 10px;
+	overflow: hidden;
+}
+
+.flw-method {
+	align-items: flex-start;
+	cursor: pointer;
+	display: grid;
+	gap: 16px;
+	grid-template-columns: 18px 56px minmax(0, 1fr);
+	padding: 20px 22px;
+
+	&:not(:last-child) {
+		border-bottom: 1px solid $flw-line;
+	}
+
+	&:hover {
+		background: #fcfcfd;
+	}
+
+	input {
+		height: 0;
+		opacity: 0;
+		position: absolute;
+		width: 0;
+	}
+
+	.flw-checkbox__box {
+		margin-top: 2px;
+	}
+
+	input:checked + .flw-checkbox__box {
+		border-color: $flw-orange;
+		color: $flw-orange;
+	}
+
+	input:focus-visible + .flw-checkbox__box {
+		box-shadow: 0 0 0 3px rgba(255, 155, 0, 0.25);
+	}
+
+	&__mark {
+		align-items: center;
+		border: 1px solid $flw-line;
+		border-radius: 6px;
+		display: flex;
+		height: 36px;
+		justify-content: center;
+		width: 56px;
+	}
+
+	&__text {
+		display: block;
+		min-width: 0;
+	}
+
+	&__title {
+		display: block;
+		font-size: 15px;
+		font-weight: 500;
+	}
+
+	&__desc {
+		color: $flw-body;
+		display: block;
+		font-size: 13px;
+		margin-top: 2px;
+	}
+}
+
+.flw-method-mark {
+	height: 24px;
+	width: 40px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Advanced disclosure                                                        */
+/* -------------------------------------------------------------------------- */
+
+.flw-advanced {
+	border-top: 1px solid $flw-line;
+	margin-top: 26px;
+	padding-top: 18px;
+
+	&__toggle {
+		align-items: center;
+		background: none;
+		border: 0;
+		color: $flw-body;
+		cursor: pointer;
+		display: inline-flex;
+		font-family: inherit;
+		font-size: 14px;
+		font-weight: 500;
+		gap: 8px;
+		padding: 4px 0;
+
+		&:hover {
+			color: $flw-ink;
+		}
+	}
+
+	&__caret {
+		border-left: 5px solid transparent;
+		border-right: 5px solid transparent;
+		border-top: 6px solid currentcolor;
+		transition: transform 0.15s ease;
+
+		&.is-open {
+			transform: rotate(180deg);
+		}
+	}
+
+	&__body {
+		padding-top: 16px;
+	}
+
+	&__note {
+		color: $flw-muted;
+		font-size: 13px;
+		margin: 0 0 14px;
+	}
+
+	&__grid {
+		display: grid;
+		gap: 4px 24px;
+		grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+		margin-bottom: 22px;
+	}
+}
+
+/* -------------------------------------------------------------------------- */
+/* Tabs                                                                       */
+/* -------------------------------------------------------------------------- */
+
+.flw-tabs {
+	border-bottom: 1px solid $flw-line;
+	display: flex;
+	gap: 8px;
+	margin-bottom: 30px;
+}
+
+.flw-tab {
+	background: none;
+	border: 0;
+	border-bottom: 2px solid transparent;
+	color: $flw-body;
+	cursor: pointer;
+	font-family: inherit;
+	font-size: 14px;
+	margin-bottom: -1px;
+	padding: 10px 14px;
+
+	&:hover {
+		color: $flw-ink;
+	}
+
+	&.is-active {
+		border-bottom-color: $flw-orange;
+		color: $flw-orange;
+		font-weight: 500;
+	}
+}
+
+.flw-tabpanel {
+	max-width: 720px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Loading & success                                                          */
+/* -------------------------------------------------------------------------- */
+
+.flw-loading {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	min-height: 60vh;
+
+	&__ring {
+		animation: flw-spin 0.9s linear infinite;
+		border: 3px solid #f2f4f7;
+		border-radius: 50%;
+		border-top-color: $flw-orange;
+		display: block;
+		height: 52px;
+		width: 52px;
+	}
+}
+
+.flw-success {
+	margin: 0 auto;
+	max-width: 480px;
+	padding: 18vh 20px 80px;
+	text-align: center;
+
+	h1 {
+		color: $flw-orange;
+		font-size: 24px;
+		margin: 24px 0 10px;
+	}
+
+	p {
+		color: $flw-body;
+		margin: 0;
+	}
+}
+
+.flw-success-art {
+	height: 96px;
+	width: 96px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Toast                                                                      */
+/* -------------------------------------------------------------------------- */
+
+.flw-toast {
+	align-items: center;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 8px 24px rgba(16, 24, 40, 0.16);
+	display: flex;
+	font-size: 14px;
+	gap: 10px;
+	padding: 12px 14px;
+	position: fixed;
+	right: 24px;
+	top: 56px;
+	z-index: 9999;
+
+	&--success {
+		border-left: 4px solid #12b76a;
+	}
+
+	&--error {
+		border-left: 4px solid #f04438;
+	}
+
+	&__icon {
+		align-items: center;
+		background: #12b76a;
+		border-radius: 50%;
+		color: #fff;
+		display: inline-flex;
+		height: 20px;
+		justify-content: center;
+		width: 20px;
+	}
+
+	&__close {
+		background: none;
+		border: 0;
+		color: $flw-muted;
+		cursor: pointer;
+		font-size: 20px;
+		line-height: 1;
+		padding: 0 2px;
+	}
+}
+
+@keyframes flw-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+/* -------------------------------------------------------------------------- */
+/* Responsive                                                                 */
+/* -------------------------------------------------------------------------- */
+
+@media screen and (max-width: 1100px) {
+	.flw-page__body.has-aside {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.flw-page__aside {
+		max-width: 720px;
+		order: -1;
+	}
+
+}
+
+@media screen and (max-width: 782px) {
+	.flw-page__crumb-inner,
+	.flw-page__body {
+		padding-left: 16px;
+		padding-right: 16px;
+	}
+
+	.flw-welcome__title {
+		font-size: 32px;
+	}
+
+	.flw-method {
+		grid-template-columns: 18px minmax(0, 1fr);
+
+		&__mark {
+			display: none;
+		}
+	}
+}

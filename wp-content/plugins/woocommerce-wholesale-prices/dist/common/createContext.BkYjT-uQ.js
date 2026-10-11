@@ -1,0 +1,1 @@
+import{l as s,X as c,r as a,j as u,p as i}from"./preload-helper.DksRl_n3.js";function f(r){const t=Symbol("contextKey");return{useProvide:(n,o)=>{const e=a({});return i(t,e),c(()=>{u(e,n,o||{})}),e},useInject:()=>s(t,r)||{}}}export{f as c};

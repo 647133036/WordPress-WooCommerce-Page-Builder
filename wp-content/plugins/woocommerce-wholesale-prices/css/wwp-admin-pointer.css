@@ -1,0 +1,204 @@
+/* WPay Pointer */
+#wpay_toolbar-container {
+    display: flex;
+    align-items: center;
+}
+
+.wpay-bar-tooltip .wp-pointer-content {
+    padding: 0 0 12px;
+}
+
+.wpay-bar-tooltip .wp-pointer-content h3:before {
+    height: 20px;
+    width: 20px;
+    font-size: 14px;
+}
+
+.wpay-bar-tooltip .wp-pointer-content h3 {
+    font-size: 13px;
+    line-height: 20px;
+    font-weight: 500;
+    margin: 0;
+    padding: 8px 12px 8px 42px;
+    height: 36px;
+    box-sizing: border-box;
+    /* Establish a stacking context below .wp-pointer-close (z-index: 10) so the X
+       close button is reliably above the header regardless of document order. */
+    position: relative;
+    z-index: 1;
+}
+
+.wpay-bar-tooltip .wp-pointer-content p {
+    padding: 12px 12px 0;
+    margin: 0;
+}
+
+.wpay-bar-tooltip .wp-pointer-arrow {
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+}
+
+.wpay-bar-tooltip .wp-pointer-content ul {
+    padding-left: 32px;
+    margin: 6px 0 0;
+    padding-right: 12px;
+}
+
+.wpay-bar-tooltip .wp-pointer-content p,
+.wpay-bar-tooltip .wp-pointer-content li {
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.wpay-bar-tooltip .wp-pointer-content li {
+    list-style: disc;
+    margin-bottom: 0;
+}
+
+.wpay-bar-tooltip .wp-pointer-close {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    z-index: 10;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    box-shadow: none;
+}
+
+.wpay-bar-tooltip .wp-pointer-close:before {
+    color: #ffffff;
+    content: "\f153";
+    display: block;
+    font: normal 16px/1 dashicons;
+    text-align: center;
+    width: 16px;
+    height: 16px;
+    -webkit-font-smoothing: antialiased;
+    opacity: 0.8;
+}
+
+.wpay-bar-tooltip .wp-pointer-close:hover:before,
+.wpay-bar-tooltip .wp-pointer-close:focus-visible:before {
+    opacity: 1;
+}
+
+.wpay-bar-tooltip .wp-pointer-close:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px #ffffff;
+    border-radius: 2px;
+}
+
+body.rtl .wpay-bar-tooltip .wp-pointer-content {
+    padding: 0 0 12px;
+}
+
+body.rtl .wpay-bar-tooltip .wp-pointer-content h3:before {
+    height: 20px;
+    width: 20px;
+    font-size: 14px;
+}
+
+body.rtl .wpay-bar-tooltip .wp-pointer-content h3 {
+    font-size: 13px;
+    line-height: 20px;
+    font-weight: 500;
+    margin: 0;
+    padding: 8px 42px 8px 12px;
+    /* Swapped left and right padding */
+    height: 36px;
+    box-sizing: border-box;
+}
+
+body.rtl .wpay-bar-tooltip .wp-pointer-content p {
+    padding: 12px 12px 0;
+    margin: 0;
+}
+
+body.rtl .wpay-bar-tooltip .wp-pointer-arrow {
+    right: 50%;
+    /* Changed left to right */
+    transform: translateX(50%);
+    /* Adjusted translate direction */
+    top: 1px;
+}
+
+body.rtl .wpay-bar-tooltip .wp-pointer-content ul {
+    padding-right: 32px;
+    /* Swapped left and right padding */
+    margin: 6px 0 0;
+    padding-left: 12px;
+    /* Adjusted right padding */
+}
+
+body.rtl .wpay-bar-tooltip .wp-pointer-content p,
+body.rtl .wpay-bar-tooltip .wp-pointer-content li {
+    font-size: 12px;
+    line-height: 20px;
+}
+
+body.rtl .wpay-bar-tooltip .wp-pointer-content li {
+    list-style: disc;
+    margin-bottom: 0;
+}
+
+body.rtl .wpay-bar-tooltip .wp-pointer-buttons {
+    right: auto;
+    left: 12px;
+}
+
+body.rtl .wpay-bar-tooltip .wp-pointer-close {
+    right: auto;
+    left: 10px;
+}
+
+.wpay-bar-tooltip .wp-pointer-buttons {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    height: 30px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    padding: 5px 0 5px 15px;
+}
+
+.wpay-bar-tooltip .wp-pointer-buttons .close {
+    font-size: 12px;
+    line-height: 18px;
+    padding-left: 4px;
+    color: #787c82;
+}
+
+.wpay-bar-tooltip .wp-pointer-buttons a.close:before {
+    line-height: 16px;
+    width: 16px;
+}
+
+.wpay-bar-tooltip .wp-pointer-buttons a.close:hover:before {
+    color: #787c82;
+}
+
+.wpay-bar-tooltip .button {
+    margin: 16px 12px 0;
+    padding: 0 12px;
+    border-radius: 4px;
+}
+
+.wpay-bar-tooltip.wp-pointer-top {
+    padding-top: 12px;
+}
+
+.wpay-bar-tooltip button {
+    position: relative;
+}
+
+.wpay-bar-tooltip button.is-busy span {
+    visibility: hidden;
+}
+
+.wpay-bar-tooltip button.is-busy:disabled {
+    background: #0073aa !important;
+    color: #ffffff !important;
+}

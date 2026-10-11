@@ -1,0 +1,50 @@
+.rfw-skip-paid-ads-survey-modal {
+	inline-size: 840px;
+}
+
+.rfw-skip-paid-ads-survey-modal__benefits {
+	font-size: variables.$rfw-font-base;
+	background-color: colors.$rfw-color-gray-0;
+	padding: wpVariables.$grid-unit-30;
+
+	.rfw-skip-paid-ads-survey-modal__benefits-title,
+	.rfw-skip-paid-ads-survey-modal__benefits-item-title {
+		font-size: variables.$rfw-font-base;
+		font-weight: 600;
+		margin-block: 0 wpVariables.$grid-unit-10;
+		margin-inline: 0;
+	}
+
+	.rfw-skip-paid-ads-survey-modal__benefits-title {
+		margin-block: 0 wpVariables.$grid-unit-20;
+		margin-inline: 0;
+	}
+
+	p {
+		color: wpColors.$gray-700;
+		font-size: variables.$rfw-font-base;
+		margin: 0;
+
+		+ p {
+			margin-block-start: wpVariables.$grid-unit-10;
+		}
+	}
+
+	.rfw-skip-paid-ads-survey-modal__benefits-list,
+	li {
+		margin: 0;
+	}
+
+	li + li {
+		margin-block-start: wpVariables.$grid-unit-20;
+	}
+
+	a[data-link-type="external"] {
+		align-items: center;
+		display: inline-flex;
+
+		svg {
+			fill: currentcolor;
+		}
+	}
+}

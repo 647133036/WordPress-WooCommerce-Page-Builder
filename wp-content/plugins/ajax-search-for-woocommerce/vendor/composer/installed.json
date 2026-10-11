@@ -1,0 +1,18 @@
+{
+    "packages": [
+        {
+            "name": "freemius/wordpress-sdk",
+            "version": "2.13.5",
+            "version_normalized": "2.13.5.0",
+            "dist": {
+                "type": "zip",
+                "url": "https://fibo.works/wordpress-sdk-2.13.5.zip"
+            },
+            "type": "library",
+            "installation-source": "dist",
+            "install-path": "../freemius/wordpress-sdk"
+        }
+    ],
+    "dev": false,
+    "dev-package-names": []
+}

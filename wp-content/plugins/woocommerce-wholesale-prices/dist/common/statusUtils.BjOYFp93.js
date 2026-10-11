@@ -1,0 +1,1 @@
+import{e}from"./preload-helper.DksRl_n3.js";function r(a,s,t){return e({["".concat(a,"-status-success")]:s==="success",["".concat(a,"-status-warning")]:s==="warning",["".concat(a,"-status-error")]:s==="error",["".concat(a,"-status-validating")]:s==="validating",["".concat(a,"-has-feedback")]:t})}const c=(a,s)=>s||a;export{c as a,r as g};

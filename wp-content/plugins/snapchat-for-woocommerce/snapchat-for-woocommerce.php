@@ -1,0 +1,86 @@
+<?php
+/**
+ * Plugin Name: Snapchat for WooCommerce
+ * Description: Seamlessly integrates your WooCommerce store with Snapchat's powerful advertising platform, enabling you to reach millions of potential customers through engaging visual ads.
+ * Version: 1.0.6
+ * Author: WooCommerce
+ * Author URI: https://woocommerce.com/
+ * Text Domain: snapchat-for-woocommerce
+ * Domain Path: /languages
+ * Requires Plugins: woocommerce
+ * Requires PHP: 7.4
+ * PHP tested up to: 8.4
+ * Requires at least: 6.9
+ * Tested up to: 7.1
+ * WC requires at least: 10.9
+ * WC tested up to: 11.1
+ *
+ * License: GNU General Public License v3.0
+ * License URI: http://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * @package snapchat-for-woocommerce
+ */
+
+use SnapchatForWooCommerce\Utils\Storage\Options;
+use SnapchatForWooCommerce\Utils\Storage\OptionDefaults;
+use SnapchatForWooCommerce\ServiceContainer;
+use SnapchatForWooCommerce\ServiceKey;
+
+defined( 'ABSPATH' ) || exit;
+
+if ( ! defined( 'SNAPCHAT_FOR_WOOCOMMERCE_VERSION' ) ) {
+	define( 'SNAPCHAT_FOR_WOOCOMMERCE_VERSION', '1.0.6' ); // WRCS: DEFINED_VERSION.
+}
+
+if ( ! defined( 'SNAPCHAT_FOR_WOOCOMMERCE_FILE' ) ) {
+	define( 'SNAPCHAT_FOR_WOOCOMMERCE_FILE', __FILE__ );
+}
+
+if ( ! defined( 'SNAPCHAT_FOR_WOOCOMMERCE_PLUGIN_DIR' ) ) {
+	define( 'SNAPCHAT_FOR_WOOCOMMERCE_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+}
+
+if ( ! defined( 'SNAPCHAT_FOR_WOOCOMMERCE_PLUGIN_URL' ) ) {
+	define( 'SNAPCHAT_FOR_WOOCOMMERCE_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+}
+
+if ( ! defined( 'SNAPCHAT_FOR_WOOCOMMERCE_PLUGIN_BUILD_PATH' ) ) {
+	define( 'SNAPCHAT_FOR_WOOCOMMERCE_PLUGIN_BUILD_PATH', SNAPCHAT_FOR_WOOCOMMERCE_PLUGIN_DIR . 'js/build/' );
+}
+
+if ( ! defined( 'SNAPCHAT_FOR_WOOCOMMERCE_BUILD_URL' ) ) {
+	define( 'SNAPCHAT_FOR_WOOCOMMERCE_BUILD_URL', SNAPCHAT_FOR_WOOCOMMERCE_PLUGIN_URL . 'js/build/' );
+}
+
+if ( ! defined( 'SNAPCHAT_FOR_WOOCOMMERCE_DEBUG' ) ) {
+	define( 'SNAPCHAT_FOR_WOOCOMMERCE_DEBUG', false );
+}
+
+require_once plugin_dir_path( __FILE__ ) . '/vendor/autoload_packages.php';
+
+register_activation_hook(
+	__FILE__,
+	function () {
+		Options::preload_defaults();
+
+		// Schedule recurring CSV export task when the plugin is activated.
+		if ( 'connected' === Options::get( OptionDefaults::ONBOARDING_STATUS ) ) {
+			ServiceContainer::get( ServiceKey::PRODUCT_EXPORT_SERVICE )->maybe_schedule_recurring_export();
+		}
+	}
+);
+
+register_deactivation_hook(
+	__FILE__,
+	function () {
+		// Unschedule all tasks related to product catalog export.
+		ServiceContainer::get( ServiceKey::PRODUCT_EXPORT_SERVICE )->maybe_unschedule_export_jobs();
+	}
+);
+
+add_action(
+	'woocommerce_loaded',
+	function () {
+		\SnapchatForWooCommerce\Plugin::init();
+	}
+);

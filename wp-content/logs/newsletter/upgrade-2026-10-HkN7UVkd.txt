@@ -1,0 +1,40 @@
+11-10-2026 00:40:47 - INFO  - 9.4.7 - 1530 - 110.4 MB/ -  > Start upgrade from 0.0.0 to 9.4.7
+11-10-2026 00:40:47 - INFO  - 9.4.7 - 1530 - 111.4 MB/ -  > Array
+(
+    [wp_newsletter_emails] => Created table `wp_newsletter_emails`
+)
+
+11-10-2026 00:40:47 - INFO  - 9.4.7 - 1530 - 111.4 MB/ -  > Array
+(
+    [wp_newsletter_sent] => Created table `wp_newsletter_sent`
+)
+
+11-10-2026 00:40:47 - INFO  - 9.4.7 - 1530 - 111.4 MB/ -  > Array
+(
+    [wp_newsletter] => Created table `wp_newsletter`
+)
+
+11-10-2026 00:40:47 - INFO  - 9.4.7 - 1530 - 111.4 MB/ -  > Executing DROP INDEX email ON wp_newsletter
+11-10-2026 00:40:47 - ERROR - 9.4.7 - 1530 - 111.4 MB/ -  > Can't DROP INDEX `email`; check that it exists
+11-10-2026 00:40:47 - INFO  - 9.4.7 - 1530 - 111.4 MB/ -  > Array
+(
+    [wp_newsletter_user_logs] => Created table `wp_newsletter_user_logs`
+)
+
+11-10-2026 00:40:47 - INFO  - 9.4.7 - 1530 - 111.4 MB/ -  > Array
+(
+    [wp_newsletter_user_meta] => Created table `wp_newsletter_user_meta`
+)
+
+11-10-2026 00:40:47 - INFO  - 9.4.7 - 1530 - 111.4 MB/ -  > Array
+(
+    [wp_newsletter_stats] => Created table `wp_newsletter_stats`
+)
+
+11-10-2026 00:40:47 - INFO  - 9.4.7 - 1530 - 111.4 MB/ -  > Array
+(
+    [wp_newsletter_logs] => Created table `wp_newsletter_logs`
+)
+
+11-10-2026 00:40:47 - INFO  - 9.4.7 - 1530 - 111.4 MB/ -  > Backing up options of 0.0.0
+11-10-2026 00:40:47 - INFO  - 9.4.7 - 1530 - 111.4 MB/ -  > End
